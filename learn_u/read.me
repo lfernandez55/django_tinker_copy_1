@@ -1,0 +1,30 @@
+Create a project folder (learn_u), cd to learn_u
+virtualenv venv
+venv\Scripts\activate
+pip install django
+django-admin startproject conference
+	this creates 	learn_u/conference/db.sqlite3
+			learn_u/conference/manage.py
+			learn_u/conference/conference/settings.py
+			learn_u/conference/conference/urls.py
+python manage.py runserver
+
+django-admin startapp u2
+	this creates	learn_u/conference/u2/apps.py
+			learn_u/conference/u2/models.py
+			learn_u/conference/u2/tests.py
+			learn_u/conference/u2/views.py
+
+-----------------------
+
+python manage.py createsuperuser
+	admin
+	dhu4
+
+-----------------------
+
+Create some presentations manually
+
+-----------------------
+
+Query the table and render it in the presentations template
