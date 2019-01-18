@@ -21,7 +21,8 @@ from u2 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
-    path('apply/', views.apply),
-    path('presentations/', views.presentations),
+    path('', views.home, name='homeward'),
+    path('apply/', views.apply, name='new_presentation'),
+    path('presentations/', views.presentations, name='all_presentations'),
+    path('foo/', views.foo, name='foo'),
 ]
