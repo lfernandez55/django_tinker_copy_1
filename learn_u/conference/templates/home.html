@@ -1,5 +1,11 @@
 
-<a href="{% url 'homeward' %}">Home</a>
-<a href="{% url 'new_presentation' %}">New Presentation</a>
-<a href="{% url 'foo' %}">Foo</a>
-<a href="{% url 'all_presentations' %}">All Presentations</a>
+<a href="{% url 'homeward' %}">Home</a><br>
+<a href="{% url 'new_presentation' %}">New Presentation (basic)</a><br>
+<a href="{% url 'all_presentations' %}">All Presentations (basic)</a><br>
+
+<a href="{% url 'all_presentations_list_view' %}">All Presentations (Listview)</a><br>
+
+<a href="{% url 'presentation' 1 %}">Single Presentation (basic)</a><br>
+<a href="{% url 'presentation_detail_view' 1 %}">Single Presentation (DetailView)</a><br>
+
+<a href="{% url 'foo' %}">Foo</a><br>

@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import NewPresentationForm
 from .models import Presentation
 from django.template.response import TemplateResponse
+from django.views import generic
+
 
 def home(request):
     return render(request, 'home.html');
@@ -35,8 +37,21 @@ def presentations(request):
     presentation_list = Presentation.objects.all()
     return render(request, 'presentations.html', {'presentation_list': presentation_list})
 
+class presentations_list_view(generic.ListView):
+    model = Presentation
+    slug_field = 'product_slug'
+    #template inferred (presentation_list.html)
+
+class presentation_detail_view(generic.DetailView):
+    model = Presentation
+    #template inferred  (presentation_detail.html) (you can override it)
 
 def foo(request):
     myString="foo"
     print('dddddddddddddddddddddebug')
     return TemplateResponse(request, 'foo.html', { 'myString': myString })
+
+
+def presentation(request,presentation_id):
+    presentation = Presentation.objects.get(pk=presentation_id)
+    return render(request, 'presentation.html', {'presentation': presentation})
