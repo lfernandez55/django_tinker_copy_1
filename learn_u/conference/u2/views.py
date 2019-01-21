@@ -15,7 +15,7 @@ def apply(request):
     error=""
     if request.method == 'POST':
         description = request.POST['description']
-
+        email = request.POST['email']
         print ('number of words:', len(description.split()))
         if len(description.split()) > 15:
            # print('Submission is more than 500 words')
@@ -24,7 +24,7 @@ def apply(request):
            # print('Submission is less than 10 words')
            error = 'Submission is less than 10 words'
         else:
-           presentation = Presentation.objects.create(description=description)
+           presentation = Presentation.objects.create(description=description,email=email)
            return render(request, 'created.html')
         form = NewPresentationForm()
         return render(request, 'apply.html', {'presentation': presentation, 'form': form,'error': error})

@@ -24,4 +24,4 @@ from .models import Presentation
 class NewPresentationForm(forms.ModelForm):
     class Meta:
         model = Presentation
-        fields = ['description', ]    
+        fields = ['description','email' ]    
