@@ -32,6 +32,23 @@ def apply(request):
         form = NewPresentationForm()
     return render(request, 'apply.html', {'presentation': presentation, 'form': form, 'error': error })
 
+def new_presentation_a(request, formType='as_p'):
+    presentation = get_object_or_404(Presentation, pk=1)
+    if request.method == 'POST':
+        form = NewPresentationForm(request.POST)
+        if form.is_valid():
+            presentation = form.save()
+            print('form saved')
+            # return redirect('new_presentation_a_done.html', pk=board.pk)  # TODO: redirect to the created topic page
+    else:
+        form = NewPresentationForm()
+    return render(request, 'new_presentation_a.html', {'presentation': presentation, 'form': form, 'formType': formType})
+
+def new_presentation_diff_formats(request):
+    presentation = get_object_or_404(Presentation, pk=1)
+    form = NewPresentationForm()
+    return render(request, 'new_presentation_diff_formats.html', {'presentation': presentation, 'form': form})
+
 
 def presentations(request):
     presentation_list = Presentation.objects.all()

@@ -23,6 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homeward'),
     path('apply/', views.apply, name='new_presentation'),
+    path('new_presentation_a/', views.new_presentation_a, name='new_presentation_a'),
+    path('new_presentation_diff_formats/', views.new_presentation_diff_formats, name='new_presentation_diff_formats'),
+
+
     path('presentations/', views.presentations, name='all_presentations'),
     path('presentations_list_view/', views.presentations_list_view.as_view(), name='all_presentations_list_view'),
     path('foo/', views.foo, name='foo'),
