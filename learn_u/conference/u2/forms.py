@@ -48,10 +48,18 @@ class NewPresentationForm(forms.ModelForm):
         fields = ['description','email' ]
 
     # see https://stackoverflow.com/questions/7948750/custom-form-validation
-    # for validating codependent fields
     def clean_email(self):
         email = self.cleaned_data['email']
         # if User.objects.filter(email=email).exists():
         if self.cleaned_data['email'] == 'lfernandez@weber.edu':
             raise ValidationError("You may not use lfernandez@weber.edu!!")
         return email
+
+    # use something like this for validating codependent fields
+    # see https://stackoverflow.com/questions/7948750/custom-form-validation
+    # def clean(self):
+    #     form_data = self.cleaned_data
+    #     # if form_data['password'] != form_data['password_repeat']:
+    #     self._errors["email"] = ["Foo (error in email)"]
+    #     self._errors["description"] = ["Bar (error in desc)"]
+    #     return form_data
