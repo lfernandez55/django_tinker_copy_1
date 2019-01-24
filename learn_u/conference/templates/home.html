@@ -1,4 +1,7 @@
 
+<h1>{{ user.username }} </h1>
+
+
 <a href="{% url 'homeward' %}">Home</a><br>
 <a href="{% url 'new_presentation' %}">New Presentation (basic)</a><br>
 <a href="{% url 'new_presentation_a' %}">New Presentation_a (basic form api)</a><br>
@@ -14,3 +17,5 @@
 <a href="{% url 'presentation_detail_view' 1 %}">Single Presentation (DetailView)</a><br>
 
 <a href="{% url 'foo' %}">Foo</a><br>
+
+<a href="{% url 'signup' %}">Sign up</a><br>
