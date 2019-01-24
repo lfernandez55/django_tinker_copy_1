@@ -66,7 +66,8 @@ class presentation_detail_view(generic.DetailView):
 def foo(request):
     myString="foo"
     print('dddddddddddddddddddddebug')
-    return TemplateResponse(request, 'foo.html', { 'myString': myString })
+    phrases = ['three french hens','two turtle doves','a partridge in a pear tree']
+    return TemplateResponse(request, 'foo.html', { 'myString': myString, 'phrases': phrases })
 
 
 def presentation(request,presentation_id):
