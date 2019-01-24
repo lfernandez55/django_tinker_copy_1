@@ -20,6 +20,8 @@ from u2 import views
 
 from accounts import views as accounts_views
 
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +37,6 @@ urlpatterns = [
     path('presentation/<int:presentation_id>/', views.presentation, name="presentation"),
     path('<int:pk>/presentation_detail_view/', views.presentation_detail_view.as_view(), name="presentation_detail_view"),
 
-    path('signup', accounts_views.signup, name='signup')
-
+    path('signup', accounts_views.signup, name='signup'),
+    path('logout', auth_views.LogoutView.as_view(), name='logout'),
 ]
