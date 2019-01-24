@@ -18,6 +18,8 @@ from django.urls import path, re_path
 # from accounts import views as accounts_views
 from u2 import views
 
+from accounts import views as accounts_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +33,8 @@ urlpatterns = [
     path('presentations_list_view/', views.presentations_list_view.as_view(), name='all_presentations_list_view'),
     path('foo/', views.foo, name='foo'),
     path('presentation/<int:presentation_id>/', views.presentation, name="presentation"),
-    path('<int:pk>/presentation_detail_view/', views.presentation_detail_view.as_view(), name="presentation_detail_view")
+    path('<int:pk>/presentation_detail_view/', views.presentation_detail_view.as_view(), name="presentation_detail_view"),
+
+    path('signup', accounts_views.signup, name='signup')
+
 ]
