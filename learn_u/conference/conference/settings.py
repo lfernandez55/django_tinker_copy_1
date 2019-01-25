@@ -127,3 +127,5 @@ STATICFILES_DIRS = [
 
 
 LOGOUT_REDIRECT_URL = 'homeward'
+
+LOGIN_REDIRECT_URL = 'homeward'
