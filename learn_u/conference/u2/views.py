@@ -4,7 +4,7 @@ from .forms import NewPresentationForm
 from .models import Presentation
 from django.template.response import TemplateResponse
 from django.views import generic
-
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html');
@@ -73,3 +73,11 @@ def foo(request):
 def presentation(request,presentation_id):
     presentation = Presentation.objects.get(pk=presentation_id)
     return render(request, 'presentation.html', {'presentation': presentation})
+
+
+@login_required
+def protected_view(request):
+    return render(request, 'protected_view.html')
+
+def warning(request):
+    return render(request, 'warning.html')    

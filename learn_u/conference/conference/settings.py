@@ -128,4 +128,8 @@ STATICFILES_DIRS = [
 
 LOGOUT_REDIRECT_URL = 'homeward'
 
+
+LOGIN_URL='warning'
+
+# this is the page users are redirected to after logging in
 LOGIN_REDIRECT_URL = 'homeward'
