@@ -50,7 +50,13 @@ urlpatterns = [
     #including login, logout, password_change, password_reset.  the only one it doesn't do is signup
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('accounts/', include('django.contrib.auth.urls')),
+    # I'm overriding password_change because it brings up an admin interface that is cosmetically wrong
+    path('password_change_alternate', auth_views.PasswordChangeView.as_view(template_name='password_change.html'),
+        name='password_change_alternate'),
+    path('password_change_done_alternate', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
+        name='password_change_done_alternate'),
+
+
 
 
     path('protected_view/', views.protected_view, name='protected_view'),
