@@ -3,6 +3,8 @@
 
 
 <a href="{% url 'homeward' %}">Home</a><br>
+
+<a href="admin/">Admin</a><br>
 <a href="{% url 'new_presentation' %}">New Presentation (basic)</a><br>
 <a href="{% url 'new_presentation_a' %}">New Presentation_a (basic form api)</a><br>
 <a href="{% url 'new_presentation_diff_formats' %}">New Presentation_a (demoing diff presentation formats)</a><br>
@@ -19,7 +21,13 @@
 <a href="{% url 'foo' %}">Foo</a><br>
 
 <a href="{% url 'signup' %}">Sign up</a><br>
+<a href="{% url 'logout_alternate' %}">Log out_alternate (this redirect to the home page, the username should disappear)</a><br>
 <a href="{% url 'logout' %}">Log out (this redirect to the home page, the username should disappear)</a><br>
-<a href="{% url 'login' %}">Login </a><br>
 
+<a href="{% url 'login_alternate' %}">Login_alternate </a><br>
+<a href="{% url 'login' %}">Login (created by auth module) </a><br>
 <a href="{% url 'protected_view' %}">Protected View (must be logged in)</a><br>
+
+These urls were created automatically by the inclusion of this route:<br>
+ path('accounts/', include('django.contrib.auth.urls')),<br>
+<a href="{% url 'password_reset' %}">password_reset </a><br>

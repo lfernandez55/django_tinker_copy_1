@@ -133,3 +133,5 @@ LOGIN_URL='warning'
 
 # this is the page users are redirected to after logging in
 LOGIN_REDIRECT_URL = 'homeward'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

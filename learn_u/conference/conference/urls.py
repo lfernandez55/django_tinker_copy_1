@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 # from accounts import views as accounts_views
 from u2 import views
 
@@ -38,13 +38,25 @@ urlpatterns = [
     path('<int:pk>/presentation_detail_view/', views.presentation_detail_view.as_view(), name="presentation_detail_view"),
 
     path('signup', accounts_views.signup, name='signup'),
-    path('logout', auth_views.LogoutView.as_view(), name='logout'),
-    path('login', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+
+    #this is called alternate because the auth module has a default logout route
+    path('logout_alternate', auth_views.LogoutView.as_view(), name='logout_alternate'),
+
+    # this is called login_alternate because the auth module provides a default login route that is
+    # automatically associated with the template in registration/login.html 
+    path('login_alternate', auth_views.LoginView.as_view(template_name='login_alternate.html'), name='login_alternate'),
+    #the following automatically serve various auth related url urlpatterns
+    # see https://docs.djangoproject.com/en/2.1/topics/auth/default/#module-django.contrib.auth.views
+    #including login, logout, password_change, password_reset.  the only one it doesn't do is signup
+    path('accounts/', include('django.contrib.auth.urls')),
+
 
     path('protected_view/', views.protected_view, name='protected_view'),
 
     # path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name='accounts_login'),
 
     path('warning/', views.warning, name="warning"),
+
+
 
 ]
