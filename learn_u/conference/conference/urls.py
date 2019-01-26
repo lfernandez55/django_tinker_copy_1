@@ -43,11 +43,13 @@ urlpatterns = [
     path('logout_alternate', auth_views.LogoutView.as_view(), name='logout_alternate'),
 
     # this is called login_alternate because the auth module provides a default login route that is
-    # automatically associated with the template in registration/login.html 
+    # automatically associated with the template in registration/login.html
     path('login_alternate', auth_views.LoginView.as_view(template_name='login_alternate.html'), name='login_alternate'),
     #the following automatically serve various auth related url urlpatterns
     # see https://docs.djangoproject.com/en/2.1/topics/auth/default/#module-django.contrib.auth.views
     #including login, logout, password_change, password_reset.  the only one it doesn't do is signup
+    path('accounts/', include('django.contrib.auth.urls')),
+
     path('accounts/', include('django.contrib.auth.urls')),
 
 
@@ -57,6 +59,6 @@ urlpatterns = [
 
     path('warning/', views.warning, name="warning"),
 
-
+    path('email/', views.email, name="email"),
 
 ]

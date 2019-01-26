@@ -6,6 +6,9 @@ from django.template.response import TemplateResponse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 def home(request):
     return render(request, 'home.html');
     # return HttpResponse('Hello, World!')
@@ -80,4 +83,12 @@ def protected_view(request):
     return render(request, 'protected_view.html')
 
 def warning(request):
-    return render(request, 'warning.html')    
+    return render(request, 'warning.html')
+
+def email(request):
+    subject = 'test message from django'
+    message = 'my test message '
+    email_from = 'djangoman34@gmail.com'
+    recipient_list = ['luke.fernandez@gmail.com',]
+    send_mail( subject, message, email_from, recipient_list )
+    return TemplateResponse(request, 'email.html')
