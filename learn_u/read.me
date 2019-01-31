@@ -42,3 +42,27 @@ https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-g
 
 djangoman34@gmail.com
 beehive22
+
+---------------
+
+pip install django-widget-tweaks
+To enable widget_tweaks in your project you need to add it to INSTALLED_APPS in your projects settings.py file:
+
+INSTALLED_APPS = [
+    ...
+    'widget_tweaks',
+    ...
+]
+
+the above allows me to use
+{% load widget_tweaks %}
+but my code (cominig from simple is better) is actually this:
+{% load form_tags widget_tweaks %}
+form_tags requires boards/templatetags folder and files too!!!!  (I stuck it in the accounts folder and it works there fine)
+------
+
+documentation at:  https://github.com/jazzband/django-widget-tweaks
+also see: https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
+read about custom tags here:
+https://docs.djangoproject.com/en/2.1/howto/custom-template-tags/
+---------------
