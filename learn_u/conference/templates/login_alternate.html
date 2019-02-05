@@ -1,5 +1,4 @@
- {% extends 'base_accounts.html' %}
-
+{% extends 'base_accounts.html' %}
 
 {% block title %}Log in to My App{% endblock %}
 
@@ -15,7 +14,7 @@
             {% include 'includes/form.html' %}
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
           </form>
-        </div>
+        <!-- </div> -->
         <div class="card-footer text-muted text-center">
           New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>
         </div>

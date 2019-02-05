@@ -53,9 +53,15 @@ urlpatterns = [
     # I'm overriding password_change because it brings up an admin interface that is cosmetically wrong
     path('password_change_alternate', auth_views.PasswordChangeView.as_view(template_name='password_change.html'),
         name='password_change_alternate'),
-    path('password_change_done_alternate', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
-        name='password_change_done_alternate'),
+    # path('password_change_done_alternate', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
+    #     name='password_change_done_alternate'),
+    # path('accounts/password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
+    # name='password_change_done_alternate'),
 
+    path('settings/password/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change.html'),
+        name='password_change'),
+    path('settings/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'),
+        name='password_change_done'),
 
 
 
