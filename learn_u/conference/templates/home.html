@@ -1,42 +1,22 @@
+{% extends 'base.html' %}
 
-<h1>{{ user.username }} {{ user.email }}  django tinker copy 1</h1>
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Home</li>
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<h4>User info: {{ user.username }} {{ user.email }}  django tinker copy 1</h4>
 
 
 <a href="{% url 'homeward' %}">Home</a><br>
 
 <a href="admin/">Admin</a><br>
-<a href="{% url 'new_presentation' %}">New Presentation (basic)</a><br>
-<a href="{% url 'new_presentation_a' %}">New Presentation_a (basic form api)</a><br>
-<a href="{% url 'new_presentation_diff_formats' %}">New Presentation_a (demoing diff presentation formats)</a><br>
 
+<a href="u2/">U2 App (A collection of Django Code Snippets)</a><br>
 
-
-<a href="{% url 'all_presentations' %}">All Presentations (basic)</a><br>
-
-<a href="{% url 'all_presentations_list_view' %}">All Presentations (Listview)</a><br>
-
-<a href="{% url 'presentation' 1 %}">Single Presentation (basic)</a><br>
-<a href="{% url 'presentation_detail_view' 1 %}">Single Presentation (DetailView)</a><br>
-
-<a href="{% url 'foo' %}">Foo</a><br>
-
-<a href="{% url 'signup' %}">SIGN UP</a><br>
-
-These urls were created automatically by the inclusion of this route:<br>
- path('accounts/', include('django.contrib.auth.urls')),<br>
-
-<a href="{% url 'logout_alternate' %}">Log out_alternate (this redirect to the home page, the username should disappear)</a><br>
-<a href="{% url 'logout' %}">LOG OUT (this redirect to the home page, the username should disappear) (created by auth module)</a><br>
-
-<a href="{% url 'login_alternate' %}">LOGIN ALTERNATE lukiepie  beehive22</a><br>
-<a href="{% url 'login' %}">Login (created by auth module) </a><br>
-
-<a href="{% url 'password_change_alternate' %}">password_change just form alternate</a><br>
-<a href="{% url 'password_change' %}">PASSWORD CHANGE  (created by auth module)</a><br>
-
-
-
-<a href="{% url 'password_reset' %}">PASSWORD_RESET via email (created by auth module)</a><br>
-
-
-<a href="{% url 'email' %}">test email from django to djangoman34 </a><br>
+<a href="login_logout_resources/">Login and Logout Resources</a><br>
+{% endblock %}

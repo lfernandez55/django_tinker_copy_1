@@ -9,9 +9,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 
-def home(request):
-    return render(request, 'home.html');
+# def home(request):
+#     return render(request, 'home.html');
     # return HttpResponse('Hello, World!')
+
+def index(request):
+        return render(request, 'u2/index.html');
+        # return HttpResponse('Hello, World!')
 
 def apply(request):
     presentation = get_object_or_404(Presentation, pk=1)
@@ -28,12 +32,12 @@ def apply(request):
            error = 'Submission is less than 10 words'
         else:
            presentation = Presentation.objects.create(description=description,email=email)
-           return render(request, 'created.html')
+           return render(request, 'u2/created.html')
         form = NewPresentationForm()
-        return render(request, 'apply.html', {'presentation': presentation, 'form': form,'error': error})
+        return render(request, 'u2/apply.html', {'presentation': presentation, 'form': form,'error': error})
     else:
         form = NewPresentationForm()
-    return render(request, 'apply.html', {'presentation': presentation, 'form': form, 'error': error })
+    return render(request, 'u2/apply.html', {'presentation': presentation, 'form': form, 'error': error })
 
 def new_presentation_a(request, formType='as_p'):
     presentation = get_object_or_404(Presentation, pk=1)
@@ -45,17 +49,17 @@ def new_presentation_a(request, formType='as_p'):
             # return redirect('new_presentation_a_done.html', pk=board.pk)  # TODO: redirect to the created topic page
     else:
         form = NewPresentationForm()
-    return render(request, 'new_presentation_a.html', {'presentation': presentation, 'form': form, 'formType': formType})
+    return render(request, 'u2/new_presentation_a.html', {'presentation': presentation, 'form': form, 'formType': formType})
 
 def new_presentation_diff_formats(request):
     presentation = get_object_or_404(Presentation, pk=1)
     form = NewPresentationForm()
-    return render(request, 'new_presentation_diff_formats.html', {'presentation': presentation, 'form': form})
+    return render(request, 'u2/new_presentation_diff_formats.html', {'presentation': presentation, 'form': form})
 
 
 def presentations(request):
     presentation_list = Presentation.objects.all()
-    return render(request, 'presentations.html', {'presentation_list': presentation_list})
+    return render(request, 'u2/presentations.html', {'presentation_list': presentation_list})
 
 class presentations_list_view(generic.ListView):
     model = Presentation
@@ -70,20 +74,19 @@ def foo(request):
     myString="foo"
     print('dddddddddddddddddddddebug')
     phrases = ['three french hens','two turtle doves','a partridge in a pear tree']
-    return TemplateResponse(request, 'foo.html', { 'myString': myString, 'phrases': phrases })
+    return TemplateResponse(request, 'u2/foo.html', { 'myString': myString, 'phrases': phrases })
 
 
 def presentation(request,presentation_id):
     presentation = Presentation.objects.get(pk=presentation_id)
-    return render(request, 'presentation.html', {'presentation': presentation})
+    return render(request, 'u2/presentation.html', {'presentation': presentation})
 
 
 @login_required
 def protected_view(request):
-    return render(request, 'protected_view.html')
+    return render(request, 'u2/protected_view.html')
 
-def warning(request):
-    return render(request, 'warning.html')
+
 
 def email(request):
     subject = 'test message from django'
@@ -91,4 +94,4 @@ def email(request):
     email_from = 'djangoman34@gmail.com'
     recipient_list = ['luke.fernandez@gmail.com',]
     send_mail( subject, message, email_from, recipient_list )
-    return TemplateResponse(request, 'email.html')
+    return TemplateResponse(request, 'u2/email.html')
