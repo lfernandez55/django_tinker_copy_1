@@ -1,12 +1,23 @@
 Create a project folder (learn_u), cd to learn_u
 virtualenv venv
 venv\Scripts\activate
+
+don't forget above command.  otherwise u get this error:
+
+		'%s=%s' % (k, v) for k, v in params.items(),
+		SyntaxError: Generator expression must be parenthesized
+
+
 pip install django
 django-admin startproject conference
 	this creates 	learn_u/conference/db.sqlite3
 			learn_u/conference/manage.py
 			learn_u/conference/conference/settings.py
 			learn_u/conference/conference/urls.py
+----------
+cd into folder with manage.py (all other stuff done at top level)
+
+-----------
 python manage.py runserver
 python manage.py runserver 0.0.0.0:2000
 
@@ -66,3 +77,18 @@ also see: https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-d
 read about custom tags here:
 https://docs.djangoproject.com/en/2.1/howto/custom-template-tags/
 ---------------
+
+typical login:
+
+lukiepie
+beehive22
+----------------
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database
+
+-----------------
+Make sure to register your models.  Otherwise they dont show up in the admin
+
+-----------------

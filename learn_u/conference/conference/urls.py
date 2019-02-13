@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='homeward'),
     path('u2/', include('u2.urls')),
+    path('todo/', include('todo.urls')),
 
     path('login_logout_resources/', views.login_logout_resources, name='login_logut_resources'),
 

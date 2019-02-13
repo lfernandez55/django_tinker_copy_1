@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'u2',
     'accounts',
     'widget_tweaks',
+    'todo',
 ]
 
 MIDDLEWARE = [
