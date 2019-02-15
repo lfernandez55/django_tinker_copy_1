@@ -14,3 +14,10 @@ class NewTodoForm(forms.ModelForm):
     class Meta:
         model = Todo
         fields = ['label' ]
+
+    def clean_label(self):
+        label = self.cleaned_data['label']
+        # if User.objects.filter(email=email).exists():
+        if self.cleaned_data['label'] == 'xxxx':
+            raise ValidationError("You may not call your todo 'xxxx'")
+        return label
