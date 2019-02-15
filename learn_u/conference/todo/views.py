@@ -27,7 +27,8 @@ def todos_by_group(request,todo_group_id):
     return render(request, 'todo/todos.html', {'todos': todos, 'todo_group_name': todos[0].todo_group, 'todo_group_id': todo_group_id })
 
 def new_todo(request,todo_group_id):
-    # todo = get_object_or_404(Todo, pk=1)
+    #we instantiate the todo_group only so we can add its pk and name to the breadcrumbs in the form
+    todo_group = get_object_or_404(TodoGroup, pk=todo_group_id)
     error=""
     if request.method == 'POST':
         form = NewTodoForm(request.POST)
@@ -48,6 +49,6 @@ def new_todo(request,todo_group_id):
     #as a hidden field to the form.  but the group_id is being passed in the url string so this isn't needed. (for example: new_todo/2)
     #notice too that the url string isn't included as an action parameter in form tag. it's left off
     #instead, its already in the address field of the browser when the form is displayed.  in effect its created when
-    #the user presses the new todo button which then makes a request to new_todo/2 or new_todo/1 or whatever  
+    #the user presses the new todo button which then makes a request to new_todo/2 or new_todo/1 or whatever
     # return render(request, 'todo/new_todo.html', {'todo': todo, 'form': form, 'error': error, 'todo_group_id': todo_group_id })
-    return render(request, 'todo/new_todo.html', { 'form': form, 'error': error })
+    return render(request, 'todo/new_todo.html', { 'form': form, 'error': error, 'todo_group': todo_group })

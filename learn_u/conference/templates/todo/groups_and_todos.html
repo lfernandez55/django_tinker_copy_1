@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item active"><a href="{% url 'todo:index' %}">Todo Home</a> / My Todo Groups</li>
+  <li class="breadcrumb-item active">
+    <a href="{% url 'todo:index' %}">Todo Home</a> /
+    My Todo Groups
+  </li>
 {% endblock %}
 
 {% block content %}
