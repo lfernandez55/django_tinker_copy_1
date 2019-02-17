@@ -19,6 +19,7 @@ urlpatterns = [
     path('manage_group_of_todos/<int:todo_group_id>', views.manage_group_of_todos, name='manage_group_of_todos'),
     path('new_todo/<int:todo_group_id>', views.new_todo, name='new_todo'),
     path('create_todos/<int:todo_group_id>', views.create_todos, name='create_todos'),
+    path('update_todos/<int:todo_group_id>', views.update_todos, name='update_todos'),
 
     # path('presentations_list_view/', views.presentations_list_view.as_view(), name='all_presentations_list_view'),
     #

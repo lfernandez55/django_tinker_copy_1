@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import TodoGroup, Todo
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
-from .forms import NewTodoForm, TodoFormset
+from .forms import NewTodoForm, TodoFormset, TodoModelFormSet
 from django.shortcuts import redirect
 
 def index(request):
@@ -60,25 +60,41 @@ def manage_group_of_todos(request,todo_group_id):
     return render(request, 'todo/todos.html', {'todos': todos, 'todo_group_name': todos[0].todo_group, 'todo_group_id': todo_group_id })
 
 def create_todos(request, todo_group_id):
+    # derived from https://medium.com/@taranjeet/adding-forms-dynamically-to-a-django-formset-375f1090c2b0
+    # TODO: revert this so it only allows the creation of new todos.  Right now
+    # the below code prepopulates and when those prepopulated fields are modified it creates
+    # new todos rather modifying the existing ones
     todo_group = get_object_or_404(TodoGroup, pk=todo_group_id)
     if request.method == 'GET':
-        # formset = TodoFormset(request.GET or None)
-        # formset = TodoFormset(4)
-        todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence')
-        print(todos)
-        formset = TodoFormset(initial=[ {'label': 'aaa'},{'label': 'bbb'}])
+        todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence').values()
+        formset = TodoFormset(initial= todos)
     elif request.method == 'POST':
-
-        formset = TodoFormset(request.POST)
+        todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence').values()
+        formset = TodoFormset(request.POST,initial=todos)
         if formset.is_valid():
             for form in formset:
-                label = form.cleaned_data.get('label')
-                # save todo instance
-                if label:
-                    Todo(label=label,todo_group_id=todo_group_id).save()
+                if form.has_changed():
+                    label = form.cleaned_data.get('label')
+                    id = form.cleaned_data.get('id')
+                    print('dddddddddddddd', id)
+                    if label:
+                        Todo(label=label,todo_group_id=todo_group_id).save()
             # return redirect('store:book_list')
             # return todos_by_group(request,todo_group_id)
             return redirect('todo:todos_by_group', todo_group_id=todo_group_id)
     return render(request, 'todo/todoset.html', {
         'formset': formset, 'todo_group': todo_group
     })
+
+def update_todos(request, todo_group_id):
+    # # from https://micropyramid.com/blog/understanding-djangos-model-formsets-in-detail-and-their-advanced-usage/
+    #
+    if request.method == 'POST':
+        formset = TodoModelFormSet(data=request.POST)
+        print('debug in updatetodos')
+        if formset.is_valid():
+            print('debug 222 in updatetodos')
+            formset.save()
+    else:
+        formset = TodoModelFormSet()
+    return render(request, "todo/update_todos.html", {"formset": formset})
