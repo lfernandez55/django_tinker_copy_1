@@ -7,7 +7,8 @@
 {% block content %}
 
 <div class="mb-4">
-  <a href="{% url 'todo:new_todo' todo_group_id %}" class="btn btn-primary">New Todo  </a> 
+  <a href="{% url 'todo:new_todo' todo_group_id %}" class="btn btn-primary">New Todo  </a>
+  <a href="{% url 'todo:manage_group_of_todos' todo_group_id %}" class="btn btn-primary">Save</a>
 </div>
 
 <table class="table">
@@ -16,14 +17,23 @@
       <th>Todo Name</th>
       <th>Finished</th>
       <th>Sequence</th>
+      <th>PK</th>
     </tr>
   </thead>
   <tbody>
     {% for todo in todos %}
       <tr>
         <td>{{ todo.label }}</td>
-        <td>{{ todo.finished }}</td>
+        <td>
+          <input type="checkbox"
+          {% if todo.finished  %}
+            checked
+          {% endif %}
+          value="{{ todo.pk }}" name="finished"
+          >
+        </td>
         <td>{{ todo.sequence }}</td>
+        <td>{{ todo.pk }}</td>
       </tr>
     {% endfor %}
   </tbody>

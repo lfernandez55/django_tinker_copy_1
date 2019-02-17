@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import TodoGroup, Todo
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
-from .forms import NewTodoForm
+from .forms import NewTodoForm, TodoFormset
 from django.shortcuts import redirect
 
 def index(request):
@@ -39,7 +39,8 @@ def new_todo(request,todo_group_id):
         if form.is_valid():
            label = request.POST['label']
            todo = Todo.objects.create(label=label,todo_group_id=todo_group_id)
-           return todos_by_group(request,todo_group_id)
+           # return todos_by_group(request,todo_group_id)
+           return redirect('todo:todos_by_group', todo_group_id=todo_group_id)
         else:
            error="You have an error!"
     else:
@@ -52,3 +53,32 @@ def new_todo(request,todo_group_id):
     #the user presses the new todo button which then makes a request to new_todo/2 or new_todo/1 or whatever
     # return render(request, 'todo/new_todo.html', {'todo': todo, 'form': form, 'error': error, 'todo_group_id': todo_group_id })
     return render(request, 'todo/new_todo.html', { 'form': form, 'error': error, 'todo_group': todo_group })
+
+def manage_group_of_todos(request,todo_group_id):
+    print('in manage group of todos')
+    todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence')
+    return render(request, 'todo/todos.html', {'todos': todos, 'todo_group_name': todos[0].todo_group, 'todo_group_id': todo_group_id })
+
+def create_todos(request, todo_group_id):
+    todo_group = get_object_or_404(TodoGroup, pk=todo_group_id)
+    if request.method == 'GET':
+        # formset = TodoFormset(request.GET or None)
+        # formset = TodoFormset(4)
+        todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence')
+        print(todos)
+        formset = TodoFormset(initial=[ {'label': 'aaa'},{'label': 'bbb'}])
+    elif request.method == 'POST':
+
+        formset = TodoFormset(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                label = form.cleaned_data.get('label')
+                # save todo instance
+                if label:
+                    Todo(label=label,todo_group_id=todo_group_id).save()
+            # return redirect('store:book_list')
+            # return todos_by_group(request,todo_group_id)
+            return redirect('todo:todos_by_group', todo_group_id=todo_group_id)
+    return render(request, 'todo/todoset.html', {
+        'formset': formset, 'todo_group': todo_group
+    })
