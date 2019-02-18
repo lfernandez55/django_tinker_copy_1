@@ -13,6 +13,7 @@ class NewTodoForm(forms.ModelForm):
         help_text='The max length of the text is 300.',
         label='Todo name:'
     )
+
     class Meta:
         model = Todo
         fields = ['label' ]

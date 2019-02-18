@@ -79,22 +79,25 @@ def create_todos(request, todo_group_id):
                     print('dddddddddddddd', id)
                     if label:
                         Todo(label=label,todo_group_id=todo_group_id).save()
-            # return redirect('store:book_list')
-            # return todos_by_group(request,todo_group_id)
             return redirect('todo:todos_by_group', todo_group_id=todo_group_id)
+        else:
+            print('not valid')
     return render(request, 'todo/todoset.html', {
         'formset': formset, 'todo_group': todo_group
     })
 
 def update_todos(request, todo_group_id):
     # # from https://micropyramid.com/blog/understanding-djangos-model-formsets-in-detail-and-their-advanced-usage/
-    #
+    todo_group = get_object_or_404(TodoGroup, pk=todo_group_id)
     if request.method == 'POST':
         formset = TodoModelFormSet(data=request.POST)
         print('debug in updatetodos')
         if formset.is_valid():
             print('debug 222 in updatetodos')
             formset.save()
+        else:
+            print('NOT VALID')
     else:
         formset = TodoModelFormSet()
     return render(request, "todo/update_todos.html", {"formset": formset})
+    # return render(request, "todo/todoset.html", {"formset": formset, 'todo_group': todo_group})
