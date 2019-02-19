@@ -96,8 +96,12 @@ def update_todos(request, todo_group_id):
             print('debug 222 in updatetodos')
             formset.save()
         else:
-            print('NOT VALID')
-    else:
-        formset = TodoModelFormSet()
-    return render(request, "todo/update_todos.html", {"formset": formset})
+            print('NOT VALID', formset.errors)
+    # else:
+    todos = Todo.objects.all().filter(todo_group__id=todo_group_id).order_by('-sequence')
+    # print (todos)
+    formset = TodoModelFormSet(queryset=todos)
+    print('dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+    # print (formset)
+    return render(request, "todo/update_todos.html", {"formset": formset,'todo_group': todo_group })
     # return render(request, "todo/todoset.html", {"formset": formset, 'todo_group': todo_group})

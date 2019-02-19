@@ -28,4 +28,5 @@ class NewTodoForm(forms.ModelForm):
 # TodoFormset = formset_factory(NewTodoForm, extra=2)
 TodoFormset = formset_factory(NewTodoForm)
 
-TodoModelFormSet = modelformset_factory(Todo, exclude=())
+# TodoModelFormSet = modelformset_factory(Todo, exclude=['sequence'], can_delete=True, can_order=True)
+TodoModelFormSet = modelformset_factory(Todo, exclude=['todo_group'], can_delete=True,extra=1)

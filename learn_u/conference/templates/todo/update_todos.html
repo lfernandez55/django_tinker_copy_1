@@ -7,34 +7,83 @@
 {% if heading %}
 <h3>{{heading}}</h3>
 {% endif %}
+
 <form class="form-horizontal" method="POST" action="">
     {% csrf_token %}
 {{ formset.management_form }}
-{% for form in formset %}
-<div class="row form-row spacer">
-    <div class="col-2">
-        <label>{{form.label.label}}</label>
-    </div>
-    <div class="col-4">
-        <div class="input-group">
-          {{form.id.as_hidden}}
-          {{form.label}}
-          {{form.finished}}
-          {{form.sequence.as_hidden}}
-          {{form.todo_group.as_hidden}}<br>
-            <div class="input-group-append">
-                <button class="btn btn-success add-form-row">+</button>
-            </div>
-        </div>
-    </div>
-</div>
-{% endfor %}
+<table>
+    <thead>
+        {% for form in formset %}
+            {% if forloop.first %}
+                {% for field in form %}
+                    {% if field.label == "Id" or field.label == "Todo groupxxxxxxxx" %}
+                      <th>{{ field.label.hidden }}</th>
+                    {% else %}
+                      <th> {{field.label}} </th>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+    </thead>
+    <tbody>
+            <tr>
+                {% for field in form %}
+                    <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<!-- <table>
+  <thead>
+    <th>Todo Name</th>
+    <th>Done</th>
+    <th>Sequence</th>
+    <th>Group</th>
+    <th>Order</th>
+    <th>Delete</th>
+  </head>
+  <tbody>
+    {% for form in formset %}
+    <tr>
+      <td>{{form.id.as_hidden}}{{form.label}}</td>
+      <td>{{form.finished}}</td>
+      <td>{{form.sequence}}</td>
+      <td>{{form.todo_group}}</td>
+      <td>{{form.ORDER}}</td>
+      <td>{{form.DELETE}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> -->
 <div class="row spacer">
     <div class="col-4 offset-2">
-        <button type="submit" class="btn btn-block btn-primary">Create</button>
+        <button type="submit" class="btn btn-block btn-primary">Save</button>
     </div>
 </div>
 </form>
+
+
+<script>
+  // var selectionCollection = document.getElementsByTagName('select');
+  // var x;
+  // for (x = 0 ;x < selectionCollection.length ; x++ ){
+  //   selectionCollection[x].setAttribute('hidden','');
+  //   console.log(selectionCollection[x])
+  // }
+  // var val = "February Tasks";
+  // var sel = selectionCollection[x-1];
+  // var opts = sel.options;
+  // for (var opt, j = 0; opt = opts[j]; j++) {
+  //   console.log(opt.text, val);
+  //   if (opt.text == val) {
+  //     sel.selectedIndex = j;
+  //     break;
+  //   }
+  // }
+</script>
 {% endblock %}
 
 
