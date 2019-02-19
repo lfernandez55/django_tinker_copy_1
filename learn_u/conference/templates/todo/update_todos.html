@@ -16,7 +16,7 @@
         {% for form in formset %}
             {% if forloop.first %}
                 {% for field in form %}
-                    {% if field.label == "Id" or field.label == "Todo groupxxxxxxxx" %}
+                    {% if field.label == "Id" or field.label == "Todo group" %}
                       <th>{{ field.label.hidden }}</th>
                     {% else %}
                       <th> {{field.label}} </th>
@@ -60,29 +60,30 @@
 </table> -->
 <div class="row spacer">
     <div class="col-4 offset-2">
-        <button type="submit" class="btn btn-block btn-primary">Save</button>
+        <button type="submit" class="btn btn-block btn-primary" onclick="setDropDown()">Save</button>
     </div>
 </div>
 </form>
-
+<style>
+select{display:none}
+</style>
 
 <script>
-  // var selectionCollection = document.getElementsByTagName('select');
-  // var x;
-  // for (x = 0 ;x < selectionCollection.length ; x++ ){
-  //   selectionCollection[x].setAttribute('hidden','');
-  //   console.log(selectionCollection[x])
-  // }
-  // var val = "February Tasks";
-  // var sel = selectionCollection[x-1];
-  // var opts = sel.options;
-  // for (var opt, j = 0; opt = opts[j]; j++) {
-  //   console.log(opt.text, val);
-  //   if (opt.text == val) {
-  //     sel.selectedIndex = j;
-  //     break;
-  //   }
-  // }
+  //this checks to see whether the new todo field has been filled out.  if it has it sets the
+  //todo_group drop down.
+  function setDropDown(){
+    var selectionCollection = document.getElementsByTagName('select');
+    var bottomNumber = selectionCollection.length - 1
+    var bottomTodoId = "id_form-" + bottomNumber + "-label";
+    if (document.getElementById(bottomTodoId).value != ''){
+      var e = document.getElementById('id_form-0-todo_group');
+      console.log(e.options[e.selectedIndex].value);
+      selectionCollection[selectionCollection.length - 1].selectedIndex=e.selectedIndex;
+    }
+
+
+  }
+
 </script>
 {% endblock %}
 
